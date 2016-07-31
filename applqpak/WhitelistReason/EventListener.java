@@ -1,4 +1,4 @@
-package WhitelistReason;
+package applqpak.WhitelistReason;
 
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.EventHandler;
