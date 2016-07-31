@@ -147,7 +147,7 @@ public class Main extends PluginBase
             if(args.length == 1)
             {
 
-              sender.sendMessage(TextFormat.RED + "Usage: " + this.USAGE);
+              sender.sendMessage(TextFormat.RED + "Usage: /whitelistreason add <player>");
 
             }
             else
@@ -181,6 +181,51 @@ public class Main extends PluginBase
               }
 
             }
+
+          }
+          else if(args[0].equalsIgnoreCase("set"))
+          {
+
+            if(args.length == 1)
+            {
+
+              sender.sendMessage(TextFormat.RED + "Usage: /whitelistreason set <reason>");
+
+            }
+            else
+            {
+
+              args[0] = "";
+
+              String reason = this.implode(" ", args);
+
+              this.config.set("reason", reason);
+
+              this.config.save();
+
+              sender.sendMessage(TextFormat.GREEN + "Successfully updated the whitelist reason.");
+
+            }
+
+          }
+          else if(args[0].equalsIgnoreCase("enable"))
+          {
+
+            this.config.set("whitelisted", true);
+
+            this.config.save();
+
+            sender.sendMessage(TextFormat.GREEN + "Successfully enabled the whitelist.");
+
+          }
+          else if(args[0].equalsIgnoreCase("disable"))
+          {
+
+            this.config.set("whitelisted", false);
+
+            this.config.save();
+
+            sender.sendMessage(TextFormat.GREEN + "Successfully disabled the whitelist.");
 
           }
 
