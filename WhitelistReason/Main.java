@@ -8,6 +8,7 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.Player;
 
 import java.io.File;
+import java.util.*;
 
 public class Main extends PluginBase
 {
@@ -110,6 +111,86 @@ public class Main extends PluginBase
     this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
 
     this.getLogger().info(TextFormat.GREEN + "Enabled.");
+
+  }
+
+  @Override
+
+  public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
+  {
+
+    switch(cmd.getName())
+    {
+
+      case "whitelistreason":
+
+        if(args.length == 0)
+        {
+
+          sender.sendMessage(TextFormat.RED + "Usage: " + this.USAGE);
+
+        }
+        else
+        {
+
+          if(args[0].equalsIgnoreCase("version"))
+          {
+
+            sender.sendMessage(TextFormat.YELLOW + "-- WhitelistReason version --");
+
+            sender.sendMessage(TextFormat.GREEN + this.VERSION);
+
+          }
+          else if(args[0].equalsIgnoreCase("add"))
+          {
+
+            if(args.length == 1)
+            {
+
+              sender.sendMessage(TextFormat.RED + "Usage: " + this.USAGE);
+
+            }
+            else
+            {
+
+              String name = args[1];
+
+              List players = this.config.getList("players");
+
+              String[] wPlayers = this.toS(players);
+
+              if(this.in_array(name, wPlayers))
+              {
+
+                sender.sendMessage(TextFormat.RED + name + " is already whitelisted.");
+
+              }
+              else
+              {
+
+                String[] p = Arrays.copyOf(wPlayers, wPlayers.length + 1);
+
+                p[p.length - 1] = name;
+
+                this.config.set("players", p);
+
+                this.config.save();
+
+                sender.sendMessage(TextFormat.GREEN + "Successfully updated and added " + name + " to the whitelist.");
+
+              }
+
+            }
+
+          }
+
+        }
+
+      break;
+
+    }
+
+    return true;
 
   }
 
