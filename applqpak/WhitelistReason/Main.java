@@ -1,4 +1,4 @@
-package WhitelistReason;
+package applqpak.WhitelistReason;
 
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.TextFormat;
